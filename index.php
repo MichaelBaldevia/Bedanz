@@ -1,5 +1,5 @@
 <?php 
-include('Functions.php');
+include('includes/Functions.php');
 
 //loveee
 ?>
@@ -7,10 +7,53 @@ include('Functions.php');
 <html>
 <head>
 <style>
-
+* {
+  margin:0px;
+  box-sizing: border-box;
+}
+body{
+    height:100%;
+    margin:0;
+}
+.background{
+    width: 100%;
+    min-height: 100vh;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+.background::before{
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.22);
+}
 .error {color: #FF0000;}
+.container{
+    /*margin:0 auto;
+    border: 1px solid #4CAF50;
+    max-width:1100px*/
+}
 </style>
-<link rel="stylesheet" type="text/css" href="Cssfortable.css">
+<link rel="stylesheet" type="text/css" href="css/Cssfortable.css">
+<link rel="stylesheet" type="text/css" href="css/button.css">
 </head>
 <body>  <!-- 
 <h2>Created with love by <a href="http://pablogarciafernandez.com" target="_blank">Pablo García Fernández</a></h2> -->
@@ -18,6 +61,10 @@ include('Functions.php');
 
 <!-- <p><span class="error">Performance</span></p>
 <p><span class="error">Choreography, Synchronization, Transitions, Formations</span></p> -->
+<div>
+    <div style="margin:0 auto;left:50%;top:50%;">
+    <img src="images/bedanz-icon.png">
+    </div>
  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 <table class="container">
   <thead>
@@ -152,7 +199,10 @@ include('Functions.php');
 </table>
 
 
-<input type="submit" name="submit" value="Submit">  
+     <button type="submit" name="submit" class="skew-button" value="Submit">
+     <span>SUBMIT</span>
+     </button> 
+     
 </form>
 <!-- <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
   Performance: 
@@ -183,6 +233,7 @@ echo $website;
 echo "<br>";
 echo $comment;*/
 ?>
+</div>
 
 </body>
 </html>

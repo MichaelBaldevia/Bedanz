@@ -16,7 +16,7 @@ body {
   font-weight: 300;
   line-height: 1.42em;
   color:#A7A1AE;
-  background-color:#1F2739;
+  background-color:rgba(15, 23, 50, 0.79);
 }
 
 h1 {
@@ -51,7 +51,7 @@ h2 a {
 	  font-weight: bold;
 	  font-size: 1em;
   text-align: left;
-  color: #185875;
+  color: white;
 }
 
 .container td {
@@ -79,16 +79,16 @@ h2 a {
 
 /* Background-color of the odd rows */
 .container tr:nth-child(odd) {
-	  background-color: #323C50;
+	  background-color: snow;
 }
 
 /* Background-color of the even rows */
 .container tr:nth-child(even) {
-	  background-color: #2C3446;
+	  background-color: whitesmoke;
 }
 
 .container th {
-	  background-color: #1F2739;
+	  background-color: #EC3236;
 }
 
 .container td:first-child { color: #FB667A; }
@@ -100,7 +100,7 @@ h2 a {
 	        box-shadow: 0 6px 6px -6px #0E1119;
 }
 
-.container td:hover {
+.container td:nth-child(n+2):hover {
   background-color: #FFF842;
   color: #403E10;
   font-weight: bold;
@@ -109,8 +109,8 @@ h2 a {
   transform: translate3d(6px, -6px, 0);
   
   transition-delay: 0s;
-	  transition-duration: 0.4s;
-	  transition-property: all;
+  transition-duration: 0.4s;
+  transition-property: all;
   transition-timing-function: line;
 }
 
