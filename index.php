@@ -1,7 +1,7 @@
 <?php 
 include('Functions.php');
 
-//loveee
+
 ?>
 
 <html>
@@ -89,7 +89,7 @@ include('Functions.php');
        <br>
        </td>
        <td>0.05%</td>
-       <td> <input type="radio" name="gender"></td>
+       <td> <input type="checkbox" name="Submission" value="1"></td>
     </tr>
     <tr>
       <td> Clothing/Props tossed into audience
@@ -97,7 +97,7 @@ include('Functions.php');
    
       </td>
       <td>0.05%</td>
-      <td><input type="radio" name="gender"></td>
+      <td><input type="checkbox" name="Clothing" value="1"></td>
 
    </tr>
     <tr>
@@ -105,7 +105,7 @@ include('Functions.php');
        <br>
       </td>
       <td>0.05%</td>
-      <td><input type="radio" name="gender"></td>
+      <td><input type="checkbox" name="Routine" value="1"></td>
      
     </tr>
     <tr>
@@ -113,7 +113,7 @@ include('Functions.php');
        <br>
       </td>
       <td>0.05%</td>
-      <td><input type="radio" name="gender"></td>
+      <td><input type="checkbox" name="Late_Start" value="1"></td>
 
     </tr>
       <tr>
@@ -121,7 +121,7 @@ include('Functions.php');
        <br>     
       </td>
       <td>0.10%</td>
-      <td><input type="radio" name="gender"></td>
+      <td><input type="checkbox" name="Language" value="1"></td>
 
     </tr>
      <tr>
@@ -129,7 +129,7 @@ include('Functions.php');
        <br>     
       </td>
       <td>0.10%</td>
-      <td><input type="radio" name="gender"></td>
+      <td><input type="checkbox" name="Gestures" value="1"></td>
 
     </tr>
      <tr>
@@ -137,7 +137,7 @@ include('Functions.php');
        <br>     
       </td>
       <td>0.10%</td>
-      <td><input type="radio" name="gender"></td>
+      <td><input type="checkbox" name="Props" value="1"></td>
 
     </tr>
        <tr>
@@ -145,7 +145,7 @@ include('Functions.php');
        <br>     
       </td>
       <td>0.10%</td>
-      <td><input type="radio" name="gender"></td>
+      <td><input type="checkbox" name="Falls" value="1"></td>
 
     </tr>
   </tbody>
