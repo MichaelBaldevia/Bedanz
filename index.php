@@ -47,20 +47,12 @@ body{
 }
 .error {color: #FF0000;}
 .container{
-    /*margin:0 auto;
-    border: 1px solid #4CAF50;
-    max-width:1100px*/
 }
 </style>
 <link rel="stylesheet" type="text/css" href="css/Cssfortable.css">
 <link rel="stylesheet" type="text/css" href="css/button.css">
 </head>
-<body>  <!-- 
-<h2>Created with love by <a href="http://pablogarciafernandez.com" target="_blank">Pablo García Fernández</a></h2> -->
-
-
-<!-- <p><span class="error">Performance</span></p>
-<p><span class="error">Choreography, Synchronization, Transitions, Formations</span></p> -->
+<body> 
 <div>
     <div style="margin:0 auto;left:50%;top:50%;">
     <img src="images/bedanz-icon.png">
