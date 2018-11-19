@@ -1,7 +1,13 @@
 <?php 
 include('includes/Functions.php');
+
 $conn = mysqli_connect($servername, $username, $password,  $dbname);
      $result = mysqli_query($conn,"SELECT * FROM `teams`"); 
+
+ if (!isJudge()) {
+  $_SESSION['msg'] = "You must log in first";
+  header('location: Login.php');
+}
 ?>
 
 <html>

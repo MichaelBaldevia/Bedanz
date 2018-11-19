@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+session_start();
 $conn = mysqli_connect($servername, $username, $password,  $dbname);
 
 $Input_Errors = []; 
@@ -222,12 +223,12 @@ if (empty($_POST['Password'])) {
 // attempt login if no errors on form
 if (count($Input_Errors) == 0) {
 if ($_POST['Username'] == 'BedanzJudge' && $_POST['Password'] == 'JudgePassword') {
-
+$_SESSION['User'] = "judge";
+/*test_progress($_SESSION['User']);*/
 header('location: index.php');
 }
 else if ($_POST['Username'] == 'Bedanz' && $_POST['Password'] == 'Bedanz') {
-
-$_SESSION['user'] = $logged_in_user;
+$_SESSION['User'] = 'bedanz';
 $_SESSION['success']  = "You are now logged in";
 header('location: DeductionIndex.php');
 }
@@ -238,4 +239,20 @@ else {
 }
 }
 
+function isJudge()
+{
+if ($_SESSION['User'] == "judge" ) {
+return true;
+}else{
+return false;
+}
+}
+function isBedanz()
+{
+if ($_SESSION['User']  == "bedanz" ) {
+return true;
+}else{
+return false;
+}
+}
 ?>

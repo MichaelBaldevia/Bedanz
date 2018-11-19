@@ -2,6 +2,11 @@
 include('includes/Functions.php');
 $conn = mysqli_connect($servername, $username, $password,  $dbname);
   $result = mysqli_query($conn,"SELECT * FROM `teams`"); 
+
+  if (!isBedanz()) {
+  $_SESSION['msg'] = "You must log in first";
+  header('location: Login.php');
+}
 ?>
 
 <html>
