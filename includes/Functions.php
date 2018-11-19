@@ -14,6 +14,9 @@ $TeamID = 0;
    if (isset($_POST['deductionsubmit'])) {
     Deduction();
   }
+if (isset($_POST['LogIn'])) {
+		Login();
+	}
 
  function  Scoring() {
     global $Performance_Error , $Skill_Error , $Audience_Impact_Error , $Creativity_And_Originality_Error, $Performance , $Skill ,  $Audience_Impact ,$Creativity_And_Originality,$conn,$Input_Errors,$TeamID;
@@ -150,17 +153,25 @@ function  Deduction() {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "
-INSERT INTO `team_deduction`( `Team_Id`, `Late_Submission`, `Clothing_or_Props_Thrown`, `Routine_Length`, `Late_Start`, `Improper_Language`, `Lewd_Gestures`, `Damage_Incurring_Props`, `Falls_Trips_Tumbles`) VALUES ( $TeamID,$Submission,$Clothing,$Routine,$Late_Start,$Language,$Gestures,$Props,$Falls)";
+
+$query = mysqli_query($conn,"SELECT * FROM `team_deduction` WHERE Team_Id = $TeamID");
+
+$sql = "INSERT INTO `team_deduction`( `Team_Id`, `Late_Submission`, `Clothing_or_Props_Thrown`, `Routine_Length`, `Late_Start`, `Improper_Language`, `Lewd_Gestures`, `Damage_Incurring_Props`, `Falls_Trips_Tumbles`) VALUES ( $TeamID,$Submission,$Clothing,$Routine,$Late_Start,$Language,$Gestures,$Props,$Falls)";
 
 if (count($Input_Errors) == 0){
-  if ($conn->query($sql) === TRUE) {
+	if (mysqli_affected_rows($conn)  > 0) {
+		  echo "The Team has already been deducted points";
+	}
+else {
+	 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 $conn->close();
+}
+ 
 }
   else {
     display_error();
@@ -192,4 +203,39 @@ function display_error() {
 }
   
 }
+
+
+function Login(){
+global $Input_Errors;
+// grap form values
+
+// make sure form is filled properly
+if (empty($_POST['Username'])) {
+	 push_error("Username is required");
+
+}
+if (empty($_POST['Password'])) {
+	push_error("Password is required");
+}
+
+
+// attempt login if no errors on form
+if (count($Input_Errors) == 0) {
+if ($_POST['Username'] == 'BedanzJudge' && $_POST['Password'] == 'JudgePassword') {
+
+header('location: index.php');
+}
+else if ($_POST['Username'] == 'Bedanz' && $_POST['Password'] == 'Bedanz') {
+
+$_SESSION['user'] = $logged_in_user;
+$_SESSION['success']  = "You are now logged in";
+header('location: DeductionIndex.php');
+}
+
+else {
+	push_error("Wrong username/password combination");
+}
+}
+}
+
 ?>
