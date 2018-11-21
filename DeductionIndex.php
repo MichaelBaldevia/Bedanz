@@ -59,15 +59,18 @@ body{
 </head>
 <body> 
 <div>
-    <div style="margin:0 auto;left:50%;top:50%;">
-    <img src="images/bedanz-icon.png">
+    <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
+    <img src="images/bedanz-icon.png" >
     </div>
  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+  	<div style="margin:0 auto;left:50%;top:50%;text-align: center;">
+<div style="margin:0 auto;left:50%;top:50%;text-align: center;">
   <p>Point Deduction Table</p>
 
 
   <table class="container">
   <thead>
+  
       <h2>Chose the team</h2>
     <?php
     echo "<select name='TeamID'>";
@@ -75,6 +78,8 @@ while ($row = mysqli_fetch_array($result)) {
     echo "<option value='" . $row['Id'] ."'>" . $row['Name'] ."</option>";
 }
 echo "</select>"; ?>
+</div>
+</div>
     <tr>
       <th><h1>Violation</h1> </th>
 

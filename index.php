@@ -66,6 +66,7 @@ body{
  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 <table class="container">
   <thead>
+    <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
     <h2>Chose the team</h2>
     <?php
     echo "<select name='TeamID'>";
@@ -73,6 +74,7 @@ while ($row = mysqli_fetch_array($result)) {
     echo "<option value='" . $row['Id'] ."'>" . $row['Name'] ."</option>";
 }
 echo "</select>"; ?>
+</div>
     <tr>
       <th><h1>Criteria</h1> </th>
 
