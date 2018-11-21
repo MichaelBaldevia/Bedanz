@@ -1,19 +1,35 @@
 <?php
 include 'config.php';
+session_start();
 $conn = mysqli_connect($servername, $username, $password,  $dbname);
 
 $Input_Errors = []; 
 $Performance_Error = $Skill_Error = $audienceimpact_Error = $Creativity_And_Originality_Error = "";
-$Performance = $Skill =  $Audience_Impact = $Creativity_And_Originality = "";
+$Performance = $Skill =  $Audience_Impact = $Creativity_And_Originality = 0;
 $Submission = $Clothing = $Routine = $Late_Start = $Language = $Gestures = $Props = $Falls = 0;
-
+$TeamID = 0;
 
   if (isset($_POST['submit'])) {
     Scoring();
   }
+   if (isset($_POST['deductionsubmit'])) {
+    Deduction();
+  }
+if (isset($_POST['LogIn'])) {
+		Login();
+	}
 
  function  Scoring() {
-    global $Performance_Error , $Skill_Error , $Audience_Impact_Error , $Creativity_And_Originality_Error, $Performance , $Skill ,  $Audience_Impact ,$Creativity_And_Originality,$conn,$Input_Errors;
+    global $Performance_Error , $Skill_Error , $Audience_Impact_Error , $Creativity_And_Originality_Error, $Performance , $Skill ,  $Audience_Impact ,$Creativity_And_Originality,$conn,$Input_Errors,$TeamID;
+     
+      if (empty($_POST["TeamID"])) {
+       push_error("The team is Required");
+      } else {
+        if(is_numeric($_POST["TeamID"])){
+          $TeamID = test_input($_POST["TeamID"]);      
+        }
+    }
+
     if (empty($_POST["perfromance"])) {
        push_error("Score for Performance is Required");
       } else {
@@ -43,6 +59,37 @@ $Submission = $Clothing = $Routine = $Late_Start = $Language = $Gestures = $Prop
           $Audience_Impact = test_input($_POST["audienceimpact"]);
         }
       }
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} 
+
+$sql = "INSERT INTO `team_scoring`(`Team_Id`, `Performance`, `Skill`, `Creativity_and_Originality`, `Audience_Impact`, `Comments`) VALUES ( $TeamID,$Performance,$Skill,$Creativity_And_Originality,$Audience_Impact,'Default Sample')";
+if (count($Input_Errors) == 0){
+  if ($conn->query($sql) === TRUE) {
+    echo "New record created successfully";
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+}
+  else {
+    display_error();
+  }
+}
+
+
+function  Deduction() {
+    global $Performance_Error , $Skill_Error , $Audience_Impact_Error , $Creativity_And_Originality_Error, $Performance , $Skill ,  $Audience_Impact ,$Creativity_And_Originality,$conn,$Input_Errors;
+
+    if (empty($_POST["TeamID"])) {
+       push_error("The team is Required");
+      } else {
+        if(is_numeric($_POST["TeamID"])){
+          $TeamID = test_input($_POST["TeamID"]);      
+        }
+    }
+
     if (empty($_POST["Submission"])) {
       $Submission = 0;
     } else {
@@ -107,9 +154,17 @@ $Submission = $Clothing = $Routine = $Late_Start = $Language = $Gestures = $Prop
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "INSERT INTO `team_scoring`(`Team_Id`, `Performance`, `Skill`, `Creativity_and_Originality`, `Audience_Impact`, `Late_Submission`, `Clothing_or_Props_Thrown`, `Routine_Length`, `Late_Start`, `Improper_Language`, `Lewd_Gestures`, `Damage_Incurring_Props`, `Falls_Trips_Tumbles`, `Comments`) VALUES ('Default Sample',$Performance,$Skill,$Creativity_And_Originality,$Audience_Impact,$Submission,$Clothing,$Routine,$Late_Start,$Language,$Gestures,$Props,$Falls,'Default Sample')";
+
+$query = mysqli_query($conn,"SELECT * FROM `team_deduction` WHERE Team_Id = $TeamID");
+
+$sql = "INSERT INTO `team_deduction`( `Team_Id`, `Late_Submission`, `Clothing_or_Props_Thrown`, `Routine_Length`, `Late_Start`, `Improper_Language`, `Lewd_Gestures`, `Damage_Incurring_Props`, `Falls_Trips_Tumbles`) VALUES ( $TeamID,$Submission,$Clothing,$Routine,$Late_Start,$Language,$Gestures,$Props,$Falls)";
+
 if (count($Input_Errors) == 0){
-  if ($conn->query($sql) === TRUE) {
+	if (mysqli_affected_rows($conn)  > 0) {
+		  echo "The Team has already been deducted points";
+	}
+else {
+	 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
@@ -117,10 +172,15 @@ if (count($Input_Errors) == 0){
 
 $conn->close();
 }
+ 
+}
   else {
     display_error();
   }
 }
+
+
+
 function test_input($data) {
   $data = trim($data);
   $data = stripslashes($data);
@@ -143,5 +203,56 @@ function display_error() {
     echo "$value <br>";
 }
   
+}
+
+
+function Login(){
+global $Input_Errors;
+// grap form values
+
+// make sure form is filled properly
+if (empty($_POST['Username'])) {
+	 push_error("Username is required");
+
+}
+if (empty($_POST['Password'])) {
+	push_error("Password is required");
+}
+
+
+// attempt login if no errors on form
+if (count($Input_Errors) == 0) {
+if ($_POST['Username'] == 'BedanzJudge' && $_POST['Password'] == 'JudgePassword') {
+$_SESSION['User'] = "judge";
+/*test_progress($_SESSION['User']);*/
+header('location: index.php');
+}
+else if ($_POST['Username'] == 'Bedanz' && $_POST['Password'] == 'Bedanz') {
+$_SESSION['User'] = 'bedanz';
+$_SESSION['success']  = "You are now logged in";
+header('location: DeductionIndex.php');
+}
+
+else {
+	push_error("Wrong username/password combination");
+}
+}
+}
+
+function isJudge()
+{
+if ($_SESSION['User'] == "judge" ) {
+return true;
+}else{
+return false;
+}
+}
+function isBedanz()
+{
+if ($_SESSION['User']  == "bedanz" ) {
+return true;
+}else{
+return false;
+}
 }
 ?>

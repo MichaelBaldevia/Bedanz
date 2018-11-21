@@ -1,10 +1,9 @@
 <?php 
 include('includes/Functions.php');
-
 $conn = mysqli_connect($servername, $username, $password,  $dbname);
-     $result = mysqli_query($conn,"SELECT * FROM `teams`"); 
+  $result = mysqli_query($conn,"SELECT * FROM `teams`"); 
 
- if (!isJudge()) {
+  if (!isBedanz()) {
   $_SESSION['msg'] = "You must log in first";
   header('location: Login.php');
 }
@@ -60,13 +59,16 @@ body{
 </head>
 <body> 
 <div>
-    <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
+    <div style="margin:0 auto;left:50%;top:50%;">
     <img src="images/bedanz-icon.png">
     </div>
  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-<table class="container">
+  <p>Point Deduction Table</p>
+
+
+  <table class="container">
   <thead>
-    <h2>Chose the team</h2>
+      <h2>Chose the team</h2>
     <?php
     echo "<select name='TeamID'>";
 while ($row = mysqli_fetch_array($result)) {
@@ -74,54 +76,84 @@ while ($row = mysqli_fetch_array($result)) {
 }
 echo "</select>"; ?>
     <tr>
-      <th><h1>Criteria</h1> </th>
+      <th><h1>Violation</h1> </th>
 
       <th><h1>Score %</h1></th>
-      <th><h1>Grade</h1></th>
+      <th><h1>Judgement</h1></th>
    
     </tr>
   </thead>
  
   <tbody>
     <tr>
-      <td><b>Performance:</b>
+      <td>Late Submission of music
        <br>
-       <p>Choreography, Synchronization, Transitions, Formations</p>
        </td>
-       <td>40%</td>
-       <td><input type="number" name="perfromance" value="<?php echo $name;?>"></td>
+       <td>0.05%</td>
+       <td> <input type="checkbox" name="Submission" value="1"></td>
     </tr>
     <tr>
-      <td> <b>Skill:</b>
+      <td> Clothing/Props tossed into audience
        <br>
-       <p>Proper execution of Choreography and Intensity/Difficulty of Dance Routine
-       </p>
+   
       </td>
-      <td>35%</td>
-      <td><input type="number" name="skill" value="<?php echo $name;?>"></td>
+      <td>0.05%</td>
+      <td><input type="checkbox" name="Clothing" value="1"></td>
 
-   </tr> 
+   </tr>
     <tr>
-      <td><b>Creativity and Originality:</b>
+      <td>Routine Length (Over of Under Limit)
        <br>
-       <p>Incoporating Unique and Original/Creative moves and a Distinct and Eye-Catching Concept</p>
       </td>
-      <td>15%</td>
-      <td><input type="number" name="creativityandoriginality" value="<?php echo $name;?>"></td>
+      <td>0.05%</td>
+      <td><input type="checkbox" name="Routine" value="1"></td>
      
     </tr>
     <tr>
-      <td><b>Audience Impact:</b>
+      <td>Late Start (Failure to appear within 20 seconds)
        <br>
-       <p>Entertainment Value and Crowd Appeal</p>
       </td>
-      <td>10%</td>
-      <td><input type="number" name="audienceimpact" value="<?php echo $name;?>"></td>
+      <td>0.05%</td>
+      <td><input type="checkbox" name="Late_Start" value="1"></td>
+
+    </tr>
+      <tr>
+      <td>Music Containing Improper language and Lyrics
+       <br>     
+      </td>
+      <td>0.10%</td>
+      <td><input type="checkbox" name="Language" value="1"></td>
+
+    </tr>
+     <tr>
+      <td>Lewd gestures and movements
+       <br>     
+      </td>
+      <td>0.10%</td>
+      <td><input type="checkbox" name="Gestures" value="1"></td>
+
+    </tr>
+     <tr>
+      <td>User of props that may damage the stage or may affect other groups' performance
+       <br>     
+      </td>
+      <td>0.10%</td>
+      <td><input type="checkbox" name="Props" value="1"></td>
+
+    </tr>
+       <tr>
+      <td>Falls,trips and/or tumbles
+       <br>     
+      </td>
+      <td>0.10%</td>
+      <td><input type="checkbox" name="Falls" value="1"></td>
 
     </tr>
   </tbody>
 </table>
-   <button type="submit" name="submit" class="skew-button" value="Submit">
+
+
+     <button type="submit" name="deductionsubmit" class="skew-button" value="Submit">
      <span>SUBMIT</span>
      </button> 
      
