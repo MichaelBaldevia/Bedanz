@@ -62,7 +62,7 @@ body{
 <!-- <p><span class="error">Performance</span></p>
 <p><span class="error">Choreography, Synchronization, Transitions, Formations</span></p> -->
 <div>
-    <div style="margin:0 auto;left:50%;top:50%;">
+    <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
     <img src="images/bedanz-icon.png">
     </div>
  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
