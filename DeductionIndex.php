@@ -62,9 +62,18 @@ body{
     <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
     <img src="images/bedanz-icon.png" >
     </div>
+    <div>
+    	
+    
+     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <button type="submit" name="LogOut" class="skew-button" value="LogOut">
+     <span>Log Out</span>
+     </button> 
+   </form>
+</div>
  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
   	<div style="margin:0 auto;left:50%;top:50%;text-align: center;">
-<div style="margin:0 auto;left:50%;top:50%;text-align: center;">
+
   <p>Point Deduction Table</p>
 
 
@@ -78,7 +87,6 @@ while ($row = mysqli_fetch_array($result)) {
     echo "<option value='" . $row['Id'] ."'>" . $row['Name'] ."</option>";
 }
 echo "</select>"; ?>
-</div>
 </div>
     <tr>
       <th><h1>Violation</h1> </th>

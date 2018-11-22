@@ -63,6 +63,11 @@ body{
     <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
     <img src="images/bedanz-icon.png">
     </div>
+     <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+    <button type="submit" name="LogOut" class="skew-button" value="LogOut">
+     <span>Log Out</span>
+     </button> 
+   </form>
  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 <table class="container">
   <thead>
