@@ -12,6 +12,10 @@ $conn = mysqli_connect($servername, $username, $password,  $dbname);
 
 <html>
 <head>
+    <script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <style>
 * {
   margin:0px;
@@ -50,13 +54,17 @@ body{
     top: 0;
     left: 0;
     background-color: rgba(255, 255, 255, 0.22);
+    background-image: url(images/picture1.jpg);
 }
 .error {color: #FF0000;}
 .container{
 }
+
 </style>
 <link rel="stylesheet" type="text/css" href="css/Cssfortable.css">
 <link rel="stylesheet" type="text/css" href="css/button.css">
+<link rel="stylesheet" type="text/css" href="css/styledrop.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 </head>
 <body> 
 <div>
@@ -67,14 +75,16 @@ body{
 <table class="container">
   <thead>
     <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
-    <h2>Chose the team</h2>
+    <h2 style="display: inline-block">Chose the team:</h2>
+    <select name='TeamID' id="sources" class="custom-select sources" placeholder="Team" style="display: inline-block">
     <?php
-    echo "<select name='TeamID'>";
 while ($row = mysqli_fetch_array($result)) {
     echo "<option value='" . $row['Id'] ."'>" . $row['Name'] ."</option>";
 }
-echo "</select>"; ?>
+?>
+</select>
 </div>
+    
     <tr>
       <th><h1>Criteria</h1> </th>
 
@@ -158,6 +168,8 @@ echo "<br>";
 echo $comment;*/
 ?>
 </div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
+    <script src="js/indexdrop.js"></script>
 </body>
 </html>
