@@ -18,7 +18,9 @@ $TeamID = 0;
 if (isset($_POST['LogIn'])) {
 		Login();
 	}
-
+if (isset($_POST['LogOut'])) {
+		LogOut();
+	}
  function  Scoring() {
     global $Performance_Error , $Skill_Error , $Audience_Impact_Error , $Creativity_And_Originality_Error, $Performance , $Skill ,  $Audience_Impact ,$Creativity_And_Originality,$conn,$Input_Errors,$TeamID;
      
@@ -63,15 +65,21 @@ if (isset($_POST['LogIn'])) {
     die("Connection failed: " . $conn->connect_error);
 } 
 
-$sql = "INSERT INTO `team_scoring`(`Team_Id`, `Performance`, `Skill`, `Creativity_and_Originality`, `Audience_Impact`, `Comments`) VALUES ( $TeamID,$Performance,$Skill,$Creativity_And_Originality,$Audience_Impact,'Default Sample')";
+$query = mysqli_query($conn,"SELECT * FROM `team_scoring` WHERE Judge_Id = '" . $_SESSION['user']['Id'] . "' AND Team_Id = $TeamID");
+
+$sql = "INSERT INTO `team_scoring`(`Team_Id`,Judge_Id, `Performance`, `Skill`, `Creativity_and_Originality`, `Audience_Impact`, `Comments`) VALUES ( $TeamID, '" . $_SESSION['user']['Id'] . "',$Performance,$Skill,$Creativity_And_Originality,$Audience_Impact,'Default Sample')";
 if (count($Input_Errors) == 0){
+	if (mysqli_affected_rows($conn)  > 0) {
+		  echo "The Team has already been deducted points";
+	}
+	else {
   if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
-
 $conn->close();
+}
 }
   else {
     display_error();
@@ -207,10 +215,12 @@ function display_error() {
 
 
 function Login(){
-global $Input_Errors;
+global $Input_Errors,$conn;
 // grap form values
-
+$username = $_POST['Username'];
+$password = $_POST['Password'];
 // make sure form is filled properly
+
 if (empty($_POST['Username'])) {
 	 push_error("Username is required");
 
@@ -220,28 +230,38 @@ if (empty($_POST['Password'])) {
 }
 
 
-// attempt login if no errors on form
 if (count($Input_Errors) == 0) {
-if ($_POST['Username'] == 'BedanzJudge' && $_POST['Password'] == 'JudgePassword') {
-$_SESSION['User'] = "judge";
-/*test_progress($_SESSION['User']);*/
+
+$query = "SELECT * FROM judge WHERE User_Name='$username' AND
+Password='$password' LIMIT 1";
+$results = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($results) == 1) { // user found
+
+$logged_in_user = mysqli_fetch_assoc($results);
+if ($logged_in_user['User_Type'] == 'judge') {
+
+$_SESSION['user'] = $logged_in_user;
+
+$_SESSION['success']  = "You are now logged in";
 header('location: index.php');
 }
-else if ($_POST['Username'] == 'Bedanz' && $_POST['Password'] == 'Bedanz') {
-$_SESSION['User'] = 'bedanz';
+else if ($logged_in_user['User_Type'] == 'bedanz') {
+$_SESSION['user'] = $logged_in_user;
 $_SESSION['success']  = "You are now logged in";
-header('location: DeductionIndex.php');
+header('location: Deductionindex.php');
+}
+}else {
+push_error("Wrong username/password combination");
+}
+}
 }
 
-else {
-	push_error("Wrong username/password combination");
-}
-}
-}
+
 
 function isJudge()
 {
-if ($_SESSION['User'] == "judge" ) {
+if ($_SESSION['user']['User_Type'] == 'judge' ) {
 return true;
 }else{
 return false;
@@ -249,10 +269,14 @@ return false;
 }
 function isBedanz()
 {
-if ($_SESSION['User']  == "bedanz" ) {
+if ($_SESSION['user']['User_Type']  == "bedanz" ) {
 return true;
 }else{
 return false;
 }
+}
+function LogOut() {
+	session_destroy();
+	header('location: Login.php');
 }
 ?>
