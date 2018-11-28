@@ -28,7 +28,7 @@ body {
 
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
-    </style>  <title>Day 001 Login Form</title>
+    </style>  <title>Bedanz</title>
   
   
   <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans:600'>
