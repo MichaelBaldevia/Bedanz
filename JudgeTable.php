@@ -2,7 +2,6 @@
 include('includes/Functions.php');
         //Table for users
 include('AdminHeader.php');    
-        
         $servername = "localhost";
 $username = "root";
 $password = "";
@@ -10,15 +9,11 @@ $db = "bedanz";
 
 
         $con=mysqli_connect($servername,$username,$password,$db);
-        $result = mysqli_query($con,"
-                SELECT *,team_scoring.Id as ScoringId,teams.Name as TeamName, judge.Name as JudgeName FROM `team_scoring` 
-INNER JOIN judge ON team_scoring.Judge_Id = judge.Id INNER JOIN teams ON team_scoring.Team_Id = teams.Id;
-                
-                ");
+        $result = mysqli_query($con,"SELECT * FROM `judge`");
 
             if (!isAdmin()) {
   $_SESSION['msg'] = "You must log in first";
-  header('location: ../Login.php');
+  header('location: Login.php');
 }
                 ?>
 
@@ -54,34 +49,28 @@ INNER JOIN judge ON team_scoring.Judge_Id = judge.Id INNER JOIN teams ON team_sc
 
 
   <tr style=color:black, text-align: left;>
- <th style='width:400px;text-align: left;'>Judge Name</th>
- <th style='width:250px;text-align: left;'>Team Name</th>
- <th style='width:300px;text-align: left;'>Performance</th>
- <th style='width:200px;text-align: left;'>Skill</th>
- <th style='width:500px;text-align: left;'>Creativity and Originality</th>
- <th style='width:500px;text-align: left;'>Audience Impact</th>
- <th style='width:200px;text-align: left;'>Delete</th>
- <th style='width:100px;text-align: left;'>Id</th>
+   <th style='width:500px;text-align: left;'>Name</th>
+   <th style='width:300px;text-align: left;'>User Type</th>
+   <th style='width:300px;text-align: left;'>User Name</th>
+   <th style='width:300px;text-align: left;'>User Password</th>
+   <th style='width:300px;text-align: left;'>Delete</th>
+   <th style='width:100px;text-align: left;'>Id</th>
  </tr>
  <?php
 while($row = mysqli_fetch_array($result)) {
 
 
     echo "<tr style=color:black;>";
-    echo "<td style='width:200px;'>" . $row['JudgeName'] . "</td>";
-    echo "<td style='width:200px;'>" . $row['TeamName'] . "</td>";
-    echo "<td style='width:300px;'>" . $row['Performance'] . "</td>";
-    echo "<td style='width:200px;'>" . $row['Skill'] . "</td>";
-    echo "<td style='width:500px;'>" . $row['Creativity_and_Originality'] . "</td>";
-    echo "<td style='width:500px;'>" . $row['Audience_Impact'] . "</td>";
-    
-    
+    echo "<td style='width:200px;'>" . $row['Name'] . "</td>";
+    echo "<td style='width:200px;'>" . $row['User_Type'] . "</td>";
+    echo "<td style='width:200px;'>" . $row['User_Name'] . "</td>";
+    echo "<td style='width:200px;'>" . $row['Password'] . "</td>";
 echo '<form method="post" action="" enctype="multipart/form-data">
 <td>
-<button type="submit" class="btn" onclick="return confirm("Are you sure?")" name="deleterecord">Delete</button>
+<button type="submit" class="btn" onclick="return confirm("Are you sure?")" name="DeductionDelete">Delete</button>
 </td>
 <td style="width:200px;"">
-<input name="ScoringId" value="' . $row['ScoringId'] . '" readonly style="width:100px;text-align: center;"></td></form>';
+<input name="TeamId" value="' . $row['Id'] . '" readonly style="width:100px;text-align: center;"></td></form>';
  echo "</tr>";
 }
 ?>

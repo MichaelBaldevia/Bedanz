@@ -10,7 +10,11 @@ $conn = mysqli_connect($servername, $username, $password,  $dbname);
 ?>
 
 <html>
+<html>
 <head>
+<script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <style>
 * {
   margin:0px;
@@ -49,44 +53,39 @@ body{
     top: 0;
     left: 0;
     background-color: rgba(255, 255, 255, 0.22);
+    background-image: url(images/picture1.jpg);
 }
 .error {color: #FF0000;}
 .container{
 }
+
 </style>
 <link rel="stylesheet" type="text/css" href="css/Cssfortable.css">
 <link rel="stylesheet" type="text/css" href="css/button.css">
+<link rel="stylesheet" type="text/css" href="css/styledrop.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
 </head>
-<body> 
-<div>
+<body>  
     <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
-    <img src="images/bedanz-icon.png" >
-    </div>
-    <div>
-    	
-    
      <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-    <button type="submit" name="LogOut" class="skew-button" value="LogOut">
+    <button type="submit" name="LogOut" class="skew-button1" value="LogOut" style="left:45%;margin-top:30px">
      <span>Log Out</span>
      </button> 
    </form>
-</div>
+    <img src="images/bedanz-icon.png">
+    </div>
  <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-  	<div style="margin:0 auto;left:50%;top:50%;text-align: center;">
-
-  <p>Point Deduction Table</p>
-
-
-  <table class="container">
+<table class="container">
   <thead>
-  
-      <h2>Chose the team</h2>
+    <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
+    <h2 style="display: inline-block">Chose the team:</h2>
+    <select name='TeamID' id="sources" class="custom-select sources" placeholder="Team" style="display: inline-block;" >
     <?php
-    echo "<select name='TeamID' size='5'>";
 while ($row = mysqli_fetch_array($result)) {
     echo "<option value='" . $row['Id'] ."'>" . $row['Name'] ."</option>";
 }
-echo "</select>"; ?>
+?>
+</select>
 </div>
     <tr>
       <th><h1>Violation</h1> </th>
@@ -171,35 +170,6 @@ echo "</select>"; ?>
      </button> 
      
 </form>
-<!-- <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-  Performance: 
-  <br><br>
-  Skill: <input type="text" name="skill" value="<?php echo $email;?>">
-  <br><br>
-  Creativity and Originality: <input type="text" name="creativityandoriginality" value="<?php echo $website;?>">
- 
-  <br><br>
-  Audience Impact: <input type="text" name="audienceimpact" value="<?php echo $website;?>">
-  <br><br>
-  Gender:
-  <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?> value="female">Female
-  <input type="radio" name="gender" <?php if (isset($gender) && $gender=="male") echo "checked";?> value="male">Male
-  <input type="radio" name="gender" <?php if (isset($gender) && $gender=="other") echo "checked";?> value="other">Other  
-
-  <br><br>
-  <input type="submit" name="submit" value="Submit">  
-</form>
- -->
-<?php
-/*echo "<h2>Your Input:</h2>";
-echo $name;
-echo "<br>";
-echo $email;
-echo "<br>";
-echo $website;
-echo "<br>";
-echo $comment;*/
-?>
 </div>
 
 </body>

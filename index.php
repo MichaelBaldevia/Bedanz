@@ -1,6 +1,5 @@
 <?php 
 include('includes/Functions.php');
-
 $conn = mysqli_connect($servername, $username, $password,  $dbname);
      $result = mysqli_query($conn,"SELECT * FROM `teams` ORDER BY Name ASC"); 
 
@@ -12,10 +11,9 @@ $conn = mysqli_connect($servername, $username, $password,  $dbname);
 
 <html>
 <head>
-    <script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
-
+<script src="https://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
 <style>
 * {
   margin:0px;
@@ -81,8 +79,7 @@ body{
   <thead>
     <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
     <h2 style="display: inline-block">Chose the team:</h2>
-    <select 
-    name='TeamID' id="sources" class="custom-select sources" placeholder="Team" style="display: inline-block;" >
+    <select name='TeamID' id="sources" class="custom-select sources" placeholder="Team" style="display: inline-block;" >
     <?php
 while ($row = mysqli_fetch_array($result)) {
     echo "<option value='" . $row['Id'] ."'>" . $row['Name'] ."</option>";

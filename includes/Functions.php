@@ -25,6 +25,9 @@ if (isset($_POST['LogOut'])) {
 if (isset($_POST['deleterecord'])) {
 		deleterecord();
 	}
+	if (isset($_POST['DeductionDelete'])) {
+		DedcutionDelete();
+	}
  function  Scoring() {
     global $Performance_Error , $Skill_Error , $Audience_Impact_Error , $Creativity_And_Originality_Error, $Performance , $Skill ,  $Audience_Impact ,$Creativity_And_Originality,$conn,$Input_Errors,$TeamID;
      
@@ -258,7 +261,7 @@ header('location: Deductionindex.php');
 else if ($logged_in_user['User_Type'] == 'admin') {
 $_SESSION['user'] = $logged_in_user;
 $_SESSION['success']  = "You are now logged in";
-header('location: AdminDelete/index.php');
+header('location: AdminControl.php');
 }
 }else {
 push_error("Wrong username/password combination");
@@ -299,7 +302,7 @@ function LogOut() {
 
 function deleterecord(){
 
-$id = test_input($_POST['venueid']);
+$id = test_input($_POST['ScoringId']);
 
 
 $servername = "localhost";
@@ -322,4 +325,31 @@ if ($conn->query($sql) === TRUE) {
     echo "Error deleting venue: " . $conn->error;
 }
 }
+
+function DedcutionDelete(){
+
+$id = test_input($_POST['DeductionId']);
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bedanz";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+
+	$sql = "DELETE FROM `team_deduction`  WHERE Id =   $id " ;
+
+if ($conn->query($sql) === TRUE) {
+    ?>
+    <script>
+         alert("Room Deleted successfully")
+    </script>
+<?php
+} else {
+    echo "Error deleting venue: " . $conn->error;
+}
+}
+
 ?>

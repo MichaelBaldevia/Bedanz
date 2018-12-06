@@ -14,7 +14,7 @@ $db = "bedanz";
 $con=mysqli_connect($servername,$username,$password,$db);
 mysqli_select_db($con,'bedanz');
 
-$query = mysqli_query($con,"SELECT team_scoring.Team_Id,teams.Division, teams.Name,Performance,Skill,Creativity_and_Originality,Audience_Impact,team_deduction.Late_Submission,team_deduction.Clothing_or_Props_Thrown,team_deduction.Routine_Length,team_deduction.Late_Start,team_deduction.Improper_Language,team_deduction.Lewd_Gestures,team_deduction.Damage_Incurring_Props,team_deduction.Falls_Trips_Tumbles,((Performance /100) * .40) * 100 as Performance,((Skill /100) * .35) * 100 as Skill,((Creativity_and_Originality /100) * .15)* 100 as Creativity_and_Originality, ((Audience_Impact /100) * .10)* 100 as Audience_Impact ,IF(team_deduction.Late_Submission = 1, 0.05, 0) as Late_Submission_Deduction,IF(team_deduction.Clothing_or_Props_Thrown = 1, 0.05, 0) as Clothing_or_Props_Thrown_Deduction,IF(team_deduction.Routine_Length = 1, 0.05, 0) as Routine_Length_Deduction,IF(team_deduction.Late_Start = 1, 0.05, 0) as Late_Start_Deduction,IF(team_deduction.Improper_Language = 1, 0.1, 0) as Improper_Language_Deduction,IF(team_deduction.Lewd_Gestures = 1, 0.1, 0) as Lewd_Gestures_Deduction,IF(team_deduction.Damage_Incurring_Props = 1, 0.1, 0) as Damage_Incurring_Props_Deduction,IF(team_deduction.Falls_Trips_Tumbles = 1, 0.1, 0) as Falls_Trips_Tumbles_Deduction, (((Performance /100) * .40) * 100 )+  (((Skill /100) * .35) * 100) + (((Creativity_and_Originality /100) * .15)* 100) + (((Audience_Impact /100) * .10) * 100) - ( IF(team_deduction.Late_Submission = 1, 0.05, 0)  + IF(team_deduction.Clothing_or_Props_Thrown = 1, 0.05, 0) + IF(team_deduction.Routine_Length = 1, 0.05, 0) + IF(team_deduction.Late_Start = 1, 0.05, 0) + IF(team_deduction.Improper_Language = 1, 0.1, 0) + IF(team_deduction.Lewd_Gestures = 1, 0.1, 0) + IF(team_deduction.Damage_Incurring_Props = 1, 0.1, 0) + IF(team_deduction.Falls_Trips_Tumbles = 1, 0.1, 0))  as Total_Score FROM `team_scoring` INNER JOIN `team_deduction` on team_scoring.Team_Id = team_deduction.Team_Id INNER JOIN teams on team_scoring.Team_Id = teams.Id WHERE Division = 'CAS' GROUP BY Team_Id ORDER BY Total_Score DESC");
+$query = mysqli_query($con,"SELECT team_scoring.Team_Id,teams.Division, teams.Name,Performance,Skill,Creativity_and_Originality,Audience_Impact,team_deduction.Late_Submission,team_deduction.Clothing_or_Props_Thrown,team_deduction.Routine_Length,team_deduction.Late_Start,team_deduction.Improper_Language,team_deduction.Lewd_Gestures,team_deduction.Damage_Incurring_Props,team_deduction.Falls_Trips_Tumbles,((Performance /100) * .40) * 100 as Performance,((Skill /100) * .35) * 100 as Skill,((Creativity_and_Originality /100) * .15)* 100 as Creativity_and_Originality, ((Audience_Impact /100) * .10)* 100 as Audience_Impact ,IF(team_deduction.Late_Submission = 1, 0.05, 0) as Late_Submission_Deduction,IF(team_deduction.Clothing_or_Props_Thrown = 1, 0.05, 0) as Clothing_or_Props_Thrown_Deduction,IF(team_deduction.Routine_Length = 1, 0.05, 0) as Routine_Length_Deduction,IF(team_deduction.Late_Start = 1, 0.05, 0) as Late_Start_Deduction,IF(team_deduction.Improper_Language = 1, 0.1, 0) as Improper_Language_Deduction,IF(team_deduction.Lewd_Gestures = 1, 0.1, 0) as Lewd_Gestures_Deduction,IF(team_deduction.Damage_Incurring_Props = 1, 0.1, 0) as Damage_Incurring_Props_Deduction,IF(team_deduction.Falls_Trips_Tumbles = 1, 0.1, 0) as Falls_Trips_Tumbles_Deduction, (((Performance /100) * .40) * 100 )+  (((Skill /100) * .35) * 100) + (((Creativity_and_Originality /100) * .15)* 100) + (((Audience_Impact /100) * .10) * 100) - ( IF(team_deduction.Late_Submission = 1, 0.05, 0)  + IF(team_deduction.Clothing_or_Props_Thrown = 1, 0.05, 0) + IF(team_deduction.Routine_Length = 1, 0.05, 0) + IF(team_deduction.Late_Start = 1, 0.05, 0) + IF(team_deduction.Improper_Language = 1, 0.1, 0) + IF(team_deduction.Lewd_Gestures = 1, 0.1, 0) + IF(team_deduction.Damage_Incurring_Props = 1, 0.1, 0) + IF(team_deduction.Falls_Trips_Tumbles = 1, 0.1, 0))  as Total_Score FROM `team_scoring` INNER JOIN `team_deduction` on team_scoring.Team_Id = team_deduction.Team_Id INNER JOIN teams on team_scoring.Team_Id = teams.Id WHERE Division = 'COLLEGE' GROUP BY Team_Id ORDER BY Total_Score DESC");
 $invoice = mysqli_fetch_array($query);
 
 
@@ -86,11 +86,11 @@ $pdf->SetFont('Arial','B',9);
 
 //items
 
-$query = mysqli_query($con,"SELECT team_scoring.Team_Id,teams.Division, teams.Name,Performance,Skill,Creativity_and_Originality,Audience_Impact,team_deduction.Late_Submission,team_deduction.Clothing_or_Props_Thrown,team_deduction.Routine_Length,team_deduction.Late_Start,team_deduction.Improper_Language,team_deduction.Lewd_Gestures,team_deduction.Damage_Incurring_Props,team_deduction.Falls_Trips_Tumbles,((Performance /100) * .40) * 100 as Performance,((Skill /100) * .35) * 100 as Skill,((Creativity_and_Originality /100) * .15)* 100 as Creativity_and_Originality, ((Audience_Impact /100) * .10)* 100 as Audience_Impact ,IF(team_deduction.Late_Submission = 1, 0.05, 0) as Late_Submission_Deduction,IF(team_deduction.Clothing_or_Props_Thrown = 1, 0.05, 0) as Clothing_or_Props_Thrown_Deduction,IF(team_deduction.Routine_Length = 1, 0.05, 0) as Routine_Length_Deduction,IF(team_deduction.Late_Start = 1, 0.05, 0) as Late_Start_Deduction,IF(team_deduction.Improper_Language = 1, 0.1, 0) as Improper_Language_Deduction,IF(team_deduction.Lewd_Gestures = 1, 0.1, 0) as Lewd_Gestures_Deduction,IF(team_deduction.Damage_Incurring_Props = 1, 0.1, 0) as Damage_Incurring_Props_Deduction,IF(team_deduction.Falls_Trips_Tumbles = 1, 0.1, 0) as Falls_Trips_Tumbles_Deduction, (((Performance /100) * .40) * 100 )+  (((Skill /100) * .35) * 100) + (((Creativity_and_Originality /100) * .15)* 100) + (((Audience_Impact /100) * .10) * 100) - ( IF(team_deduction.Late_Submission = 1, 0.05, 0)  + IF(team_deduction.Clothing_or_Props_Thrown = 1, 0.05, 0) + IF(team_deduction.Routine_Length = 1, 0.05, 0) + IF(team_deduction.Late_Start = 1, 0.05, 0) + IF(team_deduction.Improper_Language = 1, 0.1, 0) + IF(team_deduction.Lewd_Gestures = 1, 0.1, 0) + IF(team_deduction.Damage_Incurring_Props = 1, 0.1, 0) + IF(team_deduction.Falls_Trips_Tumbles = 1, 0.1, 0))  as Total_Score FROM `team_scoring` INNER JOIN `team_deduction` on team_scoring.Team_Id = team_deduction.Team_Id INNER JOIN teams on team_scoring.Team_Id = teams.Id WHERE Division = 'CAS' GROUP BY Team_Id ORDER BY Total_Score DESC");
+$query = mysqli_query($con,"SELECT team_scoring.Team_Id,teams.Division, teams.Name,Performance,Skill,Creativity_and_Originality,Audience_Impact,team_deduction.Late_Submission,team_deduction.Clothing_or_Props_Thrown,team_deduction.Routine_Length,team_deduction.Late_Start,team_deduction.Improper_Language,team_deduction.Lewd_Gestures,team_deduction.Damage_Incurring_Props,team_deduction.Falls_Trips_Tumbles,((Performance /100) * .40) * 100 as Performance,((Skill /100) * .35) * 100 as Skill,((Creativity_and_Originality /100) * .15)* 100 as Creativity_and_Originality, ((Audience_Impact /100) * .10)* 100 as Audience_Impact ,IF(team_deduction.Late_Submission = 1, 0.05, 0) as Late_Submission_Deduction,IF(team_deduction.Clothing_or_Props_Thrown = 1, 0.05, 0) as Clothing_or_Props_Thrown_Deduction,IF(team_deduction.Routine_Length = 1, 0.05, 0) as Routine_Length_Deduction,IF(team_deduction.Late_Start = 1, 0.05, 0) as Late_Start_Deduction,IF(team_deduction.Improper_Language = 1, 0.1, 0) as Improper_Language_Deduction,IF(team_deduction.Lewd_Gestures = 1, 0.1, 0) as Lewd_Gestures_Deduction,IF(team_deduction.Damage_Incurring_Props = 1, 0.1, 0) as Damage_Incurring_Props_Deduction,IF(team_deduction.Falls_Trips_Tumbles = 1, 0.1, 0) as Falls_Trips_Tumbles_Deduction, (((Performance /100) * .40) * 100 )+  (((Skill /100) * .35) * 100) + (((Creativity_and_Originality /100) * .15)* 100) + (((Audience_Impact /100) * .10) * 100) - ( IF(team_deduction.Late_Submission = 1, 0.05, 0)  + IF(team_deduction.Clothing_or_Props_Thrown = 1, 0.05, 0) + IF(team_deduction.Routine_Length = 1, 0.05, 0) + IF(team_deduction.Late_Start = 1, 0.05, 0) + IF(team_deduction.Improper_Language = 1, 0.1, 0) + IF(team_deduction.Lewd_Gestures = 1, 0.1, 0) + IF(team_deduction.Damage_Incurring_Props = 1, 0.1, 0) + IF(team_deduction.Falls_Trips_Tumbles = 1, 0.1, 0))  as Total_Score FROM `team_scoring` INNER JOIN `team_deduction` on team_scoring.Team_Id = team_deduction.Team_Id INNER JOIN teams on team_scoring.Team_Id = teams.Id WHERE Division = 'COLLEGE' GROUP BY Team_Id ORDER BY Total_Score DESC");
 
 
 
- if (mysqli_affected_rows($con)  > 0) {
+ if (mysqli_affected_rows($con)  != 0) {
 $pdf->Cell(50	,5,'Team Name',1,0);
 $pdf->Cell(25	,5,'Performance',1,0);
 $pdf->Cell(15	,5,'Skill',1,0);
@@ -100,21 +100,20 @@ $pdf->Cell(30	,5,'Total Deduction',1,0);
 $pdf->Cell(20	,5,'Total Score',1,1);
 //end of line
 
-$pdf->SetFont('Arial','',12);
+$pdf->SetFont('Arial','',8);
 
-$TotalBookings = 0; //total tax
-$TotalBookingsbyEmployee = 0;
-$TotalBookingsbyStudent = 0; //total amount
-//Cell(width , height , text , border , end line , [align] )
-//display the items
+
 while($row = mysqli_fetch_array($query)){
 
 	$Total_Deduction =  $row['Late_Submission_Deduction'] + $row['Clothing_or_Props_Thrown_Deduction'] + $row['Routine_Length_Deduction'] + $row['Late_Start_Deduction'] + $row['Improper_Language_Deduction']  + $row['Lewd_Gestures_Deduction'] + $row['Damage_Incurring_Props_Deduction']  + $row['Falls_Trips_Tumbles_Deduction'];
       $Total_Score = ($row['Performance'] + $row['Skill'] + $row['Creativity_and_Originality'] + $row['Audience_Impact']) - ( $Total_Deduction );
 
+$pdf->SetFont('Arial','',8);
+$TeamName = explode(" - ",$row['Name']);
 
-	$pdf->Cell(50	,5,$row['Name'],1,0);
+	$pdf->Cell(50	,5,$TeamName[1],1,0);
 	//add thousand separator using number_format function
+	$pdf->SetFont('Arial','',12);
 	$pdf->Cell(25	,5,number_format((float)$row['Performance'], 2, '.', ''),1,0);
 	$pdf->Cell(15	,5,number_format((float)$row['Skill'], 2, '.', ''),1,0);
 	$pdf->Cell(25	,5,number_format((float)$row['Creativity_and_Originality'], 2, '.',''),1,0);
