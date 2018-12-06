@@ -28,6 +28,12 @@ if (isset($_POST['deleterecord'])) {
 	if (isset($_POST['DeductionDelete'])) {
 		DedcutionDelete();
 	}
+  if (isset($_POST['JudgeDelete'])) {
+    JudgeDelete();
+  }
+  if (isset($_POST['TeamDelete'])) {
+    TeamDelete();
+  }
  function  Scoring() {
     global $Performance_Error , $Skill_Error , $Audience_Impact_Error , $Creativity_And_Originality_Error, $Performance , $Skill ,  $Audience_Impact ,$Creativity_And_Originality,$conn,$Input_Errors,$TeamID;
      
@@ -351,5 +357,55 @@ if ($conn->query($sql) === TRUE) {
     echo "Error deleting venue: " . $conn->error;
 }
 }
+function JudgeDelete(){
 
+$id = test_input($_POST['JudgeId']);
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bedanz";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+
+  $sql = "DELETE FROM `judge`  WHERE Id =   $id " ;
+
+if ($conn->query($sql) === TRUE) {
+    ?>
+    <script>
+         alert("Judge Deleted successfully")
+    </script>
+<?php
+} else {
+    echo "Error deleting venue: " . $conn->error;
+}
+}
+
+function TeamDelete(){
+
+$id = test_input($_POST['TeamId']);
+
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bedanz";
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+
+  $sql = "DELETE FROM `teams`  WHERE Id =   $id " ;
+
+if ($conn->query($sql) === TRUE) {
+    ?>
+    <script>
+         alert("Team Deleted successfully")
+    </script>
+<?php
+} else {
+    echo "Error deleting venue: " . $conn->error;
+}
+}
 ?>

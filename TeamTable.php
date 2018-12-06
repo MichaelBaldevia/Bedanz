@@ -66,7 +66,7 @@ while($row = mysqli_fetch_array($result)) {
     echo "<td style='width:200px;'>" . $row['Division'] . "</td>";
 echo '<form method="post" action="" enctype="multipart/form-data">
 <td>
-<button type="submit" class="btn" onclick="return confirm("Are you sure?")" name="DeductionDelete">Delete</button>
+<button type="submit" class="btn" onclick="return confirm("Are you sure?")" name="TeamDelete">Delete</button>
 </td>
 <td style="width:200px;"">
 <input name="TeamId" value="' . $row['Id'] . '" readonly style="width:100px;text-align: center;"></td></form>';
