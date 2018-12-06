@@ -14,6 +14,11 @@ $db = "bedanz";
 INNER JOIN judge ON team_scoring.Judge_Id = judge.Id INNER JOIN teams ON team_scoring.Team_Id = teams.Id;
                 
                 ");
+
+            if (!isAdmin()) {
+  $_SESSION['msg'] = "You must log in first";
+  header('location: ../Login.php');
+}
                 ?>
 
 <html>

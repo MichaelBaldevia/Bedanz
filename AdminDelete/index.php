@@ -2,7 +2,7 @@
     include "config.php";
     include "../includes/Functions.php";
 
-     if (!isJudge()) {
+     if (!isAdmin()) {
   $_SESSION['msg'] = "You must log in first";
   header('location: ../Login.php');
 }

@@ -2,7 +2,7 @@
 include('includes/Functions.php');
 
 $conn = mysqli_connect($servername, $username, $password,  $dbname);
-     $result = mysqli_query($conn,"SELECT * FROM `teams`"); 
+     $result = mysqli_query($conn,"SELECT * FROM `teams` ORDER BY Name ASC"); 
 
  if (!isJudge()) {
   $_SESSION['msg'] = "You must log in first";
@@ -81,7 +81,8 @@ body{
   <thead>
     <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
     <h2 style="display: inline-block">Chose the team:</h2>
-    <select name='TeamID' id="sources" class="custom-select sources" placeholder="Team" style="display: inline-block">
+    <select 
+    name='TeamID' id="sources" class="custom-select sources" placeholder="Team" style="display: inline-block;" >
     <?php
 while ($row = mysqli_fetch_array($result)) {
     echo "<option value='" . $row['Id'] ."'>" . $row['Name'] ."</option>";

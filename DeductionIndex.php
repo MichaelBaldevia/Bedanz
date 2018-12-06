@@ -1,7 +1,7 @@
 <?php 
 include('includes/Functions.php');
 $conn = mysqli_connect($servername, $username, $password,  $dbname);
-  $result = mysqli_query($conn,"SELECT * FROM `teams`"); 
+  $result = mysqli_query($conn,"SELECT * FROM `teams` ORDER BY Name ASC"); 
 
   if (!isBedanz()) {
   $_SESSION['msg'] = "You must log in first";
@@ -82,7 +82,7 @@ body{
   
       <h2>Chose the team</h2>
     <?php
-    echo "<select name='TeamID'>";
+    echo "<select name='TeamID' size='5'>";
 while ($row = mysqli_fetch_array($result)) {
     echo "<option value='" . $row['Id'] ."'>" . $row['Name'] ."</option>";
 }
