@@ -136,9 +136,11 @@ while ($row = mysqli_fetch_array($result)) {
     </tr>
   </tbody>
 </table>
-   <button type="submit" name="submit" class="skew-button" value="Submit">
+     <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
+   <button type="submit" name="submit" class="skew-button" value="Submit" style="left:45%">
      <span>SUBMIT</span>
-     </button> 
+     </button>
+     </div>
      
 </form>
 <!-- <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  

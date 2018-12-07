@@ -26,6 +26,10 @@ $db = "bedanz";
 <link rel="stylesheet" type="text/css" href="css/button.css">
 <link rel="stylesheet" type="text/css" href="css/styledrop.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src='bootstrap/js/bootstrap.min.js'></script> 
+<script src='bootbox.min.js'></script>
 <style>
 
 .error {color: #FF0000;}
@@ -34,15 +38,59 @@ $db = "bedanz";
 </head>
 <body>
  <h1><span class="blue"></span>Score<span class="blue"></span> <span class="yellow">Table</span></h1>
+  <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
   <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <button type="submit" name="LogOut" class="skew-button1" value="LogOut" style="left:45%;margin-top:30px">
      <span>Log Out</span>
      </button> 
    </form>
-<link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src='bootstrap/js/bootstrap.min.js'></script> 
-<script src='bootbox.min.js'></script>
+    </div>
+    
+    <div style="padding-bottom:30px;">
+<form action="JudgeTable.php" method="POST" enctype="multipart/form-data">
+
+<center>
+<h3 class="fontfortitle">Add Judge</h3>
+
+
+<table style="width: 70%;">
+<tr>
+<td style="color:#A7A1AE;padding-left:20px;text-align:right">Name:</td>
+<td> <input maxlength="100" name="fullname" required="" type="text"
+autocomplete="off" style="width:300px;"/></td>
+
+</tr>
+<tr>
+<td style="color:#A7A1AE;padding-left:20px;text-align:right;">User Type:</td>
+<td><select name="user_type" style="width:300px">
+        <option value="judge">judge</option>
+        <option value="bedanz">bedanz</option>
+        <option value="admin">admin</option>
+    </select>
+    </td>
+</tr>
+<tr>
+<td style="color:#A7A1AE;padding-left:20px;text-align:right">Username:</td>
+<td> <input maxlength="100" name="username" required="" type="text"
+autocomplete="off" style="width:300px;"/></td>
+
+</tr>
+<tr>
+<td style="color:#A7A1AE;padding-left:20px;text-align:right">User Password:</td>
+<td> <input maxlength="100" name="userpassword" required="" type="text"
+autocomplete="off" style="width:300px;"/></td>
+
+</tr>
+</table>
+<p>
+            <div class="buttons">
+                <button class="button" name="createJudge"
+type="submit" style="margin-right:98px"><span>Add Judge</span></button>
+            </div>
+<!--<input name="book" type="submit" value="Book" /> -->
+    </center>
+</form>
+    </div>
 <table class="container">
 
 

@@ -164,13 +164,13 @@ while ($row = mysqli_fetch_array($result)) {
   </tbody>
 </table>
 
-
-     <button type="submit" name="deductionsubmit" class="skew-button" value="Submit">
+<div style="margin:0 auto;left:50%;top:50%;text-align: center;">
+     <button type="submit" name="deductionsubmit" class="skew-button" value="Submit" style="left:45%;">
      <span>SUBMIT</span>
      </button> 
-     
+     </div>
 </form>
-</div>
-
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="js/indexdrop.js"></script>
 </body>
 </html>

@@ -37,20 +37,54 @@ $db = "bedanz";
 </head>
 <body>
  <h1><span class="blue"></span>Score<span class="blue"></span> <span class="yellow">Table</span></h1>
+  <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
   <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <button type="submit" name="LogOut" class="skew-button1" value="LogOut" style="left:45%;margin-top:30px">
      <span>Log Out</span>
      </button> 
    </form>
+    </div>
 <link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src='bootstrap/js/bootstrap.min.js'></script> 
 <script src='bootbox.min.js'></script>
-<table class="container">
+<div style="padding-bottom:30px;">
+<form action="TeamTable.php" method="POST" enctype="multipart/form-data">
+
+<center>
+<h3 class="fontfortitle">Add Team</h3>
 
 
+<table style="width: 70%;">
+<tr>
+<td style="color:#A7A1AE;padding-left:20px;text-align:right">Team Name:</td>
+<td> <input maxlength="100" name="teamname" required="" type="text"
+autocomplete="off" style="width:300px;"/></td>
 
+</tr>
+<tr>
+<td style="color:#A7A1AE;padding-left:20px;text-align:right;">Division:</td>
+<td><select name="division" style="width:300px">
+        <option value="High School">High School</option>
+        <option value="COLLEGE">COLLEGE</option>
+    </select>
+    </td>
+</tr>
 
+</table>
+<p>
+            <div class="buttons">
+                <button class="button" name="createTeam"
+type="submit" style="margin-right:98px"><span>Add Team</span></button>
+            </div>
+<!--<input name="book" type="submit" value="Book" /> -->
+    </center>
+</form>
+    </div>
+    
+    
+    
+<table class="container" style="max-height:500px;overflow-y:auto;">
   <tr style=color:black, text-align: left;>
    <th style='width:500px;text-align: left;'>Team Name</th>
    <th style='width:300px;text-align: left;'>Division</th>

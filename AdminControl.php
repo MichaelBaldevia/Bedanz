@@ -39,11 +39,13 @@ INNER JOIN judge ON team_scoring.Judge_Id = judge.Id INNER JOIN teams ON team_sc
 </head>
 <body>
  <h1><span class="blue"></span>Score<span class="blue"></span> <span class="yellow">Table</span></h1>
+    <div style="margin:0 auto;left:50%;top:50%;text-align: center;">
   <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
     <button type="submit" name="LogOut" class="skew-button1" value="LogOut" style="left:45%;margin-top:30px">
      <span>Log Out</span>
      </button> 
    </form>
+    </div>
 <link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src='bootstrap/js/bootstrap.min.js'></script> 

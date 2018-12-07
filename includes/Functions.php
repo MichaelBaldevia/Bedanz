@@ -34,6 +34,12 @@ if (isset($_POST['deleterecord'])) {
   if (isset($_POST['TeamDelete'])) {
     TeamDelete();
   }
+  if (isset($_POST['createJudge'])) {
+    createJudge();
+  }
+  if (isset($_POST['createTeam'])) {
+    createTeam();
+  }
  function  Scoring() {
     global $Performance_Error , $Skill_Error , $Audience_Impact_Error , $Creativity_And_Originality_Error, $Performance , $Skill ,  $Audience_Impact ,$Creativity_And_Originality,$conn,$Input_Errors,$TeamID;
      
@@ -407,5 +413,65 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error deleting venue: " . $conn->error;
 }
+}
+function createTeam(){
+    global $db, $errors;
+    
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bedanz";
+
+$teamname      = e($_POST['teamname']);
+$division  = e($_POST['division']);
+
+    
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        $sql = "INSERT INTO teams
+(Name,Division) VALUES
+('$teamname','$division')";
+    
+if ($conn->query($sql) === TRUE) {
+    ?>
+    <script>
+         alert("Team added successfully")
+    </script>
+<?php
+} else {
+    echo "Error adding record: " . $conn->error;
+}
+
+}
+function createJudge(){
+    global $db, $errors;
+    
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "bedanz";
+
+$name      = $_POST['fullname'];
+$user_type  = $_POST['user_type'];
+$user_name      = $_POST['username'];
+$user_password  = $_POST['userpassword'];
+
+    
+        $conn = new mysqli($servername, $username, $password, $dbname);
+
+        $sql = "INSERT INTO judge
+(Name,User_Type,User_Name,Password) VALUES
+('$name','$user_type','$user_name','$user_password')";
+    
+if ($conn->query($sql) === TRUE) {
+    ?>
+    <script>
+         alert("User added successfully")
+    </script>
+<?php
+} else {
+    echo "Error adding record: " . $conn->error;
+}
+
 }
 ?>
